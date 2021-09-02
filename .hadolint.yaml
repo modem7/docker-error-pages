@@ -2,3 +2,4 @@ override:
   style:
     - DL3007
     - DL3028
+    - SC2039
