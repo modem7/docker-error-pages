@@ -45,12 +45,8 @@ steps:
   when:
     status: [ success, failure ]
 
-trigger:
-  event:
-    - cron
-  cron:
-    - errorpages_latest
-
-trigger:
-  event:
-    - custom
+# trigger:
+  # event:
+    # - cron
+  # cron:
+    # - errorpages_latest
