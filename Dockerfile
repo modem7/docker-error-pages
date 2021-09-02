@@ -1,5 +1,5 @@
 # Image page: <https://hub.docker.com/_/node>
-FROM node:15.14-alpine as builder
+FROM node:alpine as builder
 
 # copy required sources into builder image
 COPY ./generator /src/generator
