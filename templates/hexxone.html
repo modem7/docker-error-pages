@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <title>{{ message }}</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.1/pixi.min.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <style>
+    @import "https://fonts.googleapis.com/css?family=Roboto";
+    * {
+      box-sizing: border-box;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    :root {
+      touch-action: pan-x pan-y;
+      height: 100%
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(65deg, #fc8833 20%, #161618 20%, #161618 80%, #fc8833 80%, #fc8833 85%)
+    }
+    canvas {
+      height: 30vh;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      top: 50%;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%)
+    }
+    a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      font-size: 1.5rem;
+    }
+    a::after {
+      content: "";
+      background: white;
+      mix-blend-mode: exclusion;
+      width: calc(100% + 20px);
+      height: 0;
+      position: absolute;
+      bottom: -4px;
+      left: -10px;
+      transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    }
+    a:hover::after {
+      height: calc(100% + 8px)
+    }
+    .content {
+      -webkit-box-align: center;
+      align-items: center;
+      color: #fafafa;
+      display: -webkit-box;
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      -webkit-box-pack: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 2
+    }
+    .content h1 {
+      font-size: 2rem;
+      text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5)
+    }
+    @media (min-width: 1000px) {
+      .content h1 {
+        font-size: 5rem
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <canvas></canvas>
+  <div class="content">
+    <h1>{{ code }}: <small>{{ message }}</small></h1>
+    <p><a href="https://hexx.one">Try looking here.</a></p>
+  </div>
+
+  <script>
+    const _0x57ff = ['floor', 'fillStyle', 'add', 'height', 'map', 'fill', 'children', 'px\x20Roboto', 'stage', 'renderer', 'addChild', 'scale', '#fc8833', 'querySelector', 'width', 'canvas', 'ticker', 'removeChildren', 'startingX', 'random', 'fillText'];
+    (function (_0x150f9b, _0x57ff37) { const _0xc9c6d0 = function (_0x369d45) { while (--_0x369d45) { _0x150f9b['push'](_0x150f9b['shift']()); } }; _0xc9c6d0(++_0x57ff37); }(_0x57ff, 0xbc));
+    const _0xc9c6 = function (_0x150f9b, _0x57ff37) { _0x150f9b = _0x150f9b - 0x0; let _0xc9c6d0 = _0x57ff[_0x150f9b]; return _0xc9c6d0; };
+    const { PIXI: { Application, particles: { ParticleContainer }, Sprite } } = window;
+    let FONT_SIZE = innerHeight / 0xa;
+    const FRACTION = 0.3, PARTICLE_CONTAINER_OPTS = { 'scale': !![], 'position': !![], 'alpha': !![] }, getHeight = () => Math[_0xc9c6('0x1')](innerHeight * FRACTION), view = document[_0xc9c6('0xe')](_0xc9c6('0x10')), AMOUNT = 0x64, onTick = () => {
+        (App[_0xc9c6('0xa')][_0xc9c6('0xf')] !== innerWidth || App['renderer'][_0xc9c6('0x4')] !== getHeight()) && (App['renderer']['resize'](innerWidth, getHeight()),
+          Fours[_0xc9c6('0x12')](), Ohhhs[_0xc9c6('0x12')](), Page[_0xc9c6('0x12')](), FONT_SIZE = innerHeight / 0xa, bootstrapLayers()); for (const _0x369d45 of [...Fours[_0xc9c6('0x7')], ...Ohhhs[_0xc9c6('0x7')], ...Page[_0xc9c6('0x7')]]) {
+            _0x369d45['x'] -= _0x369d45['vx'], _0x369d45['x'] < -_0x369d45[_0xc9c6('0xf')] && (_0x369d45['x'] = _0x369d45['startingX']);
+          }
+      }, App = new Application({
+        'antialias': !![], 'height': getHeight(), 'transparent': !![],
+        'view': view, 'width': innerWidth
+      }), createText = (_0x11882b, _0x4cb715 = { 'height': FONT_SIZE * 0x2, 'width': FONT_SIZE * 0x2 }) => {
+        const _0x14fee9 = document['createElement']('canvas'); _0x14fee9['width'] = _0x4cb715[_0xc9c6('0xf')],
+          _0x14fee9[_0xc9c6('0x4')] = _0x4cb715[_0xc9c6('0x4')]; const _0x3f2927 = _0x14fee9['getContext']('2d'); return _0x3f2927['font'] = Math[_0xc9c6('0x1')](innerHeight / 0xa) + _0xc9c6('0x8'), _0x3f2927[_0xc9c6('0x2')] = _0xc9c6('0xd'),
+            _0x3f2927[_0xc9c6('0x0')](_0x11882b, 0x0, FONT_SIZE, innerWidth), _0x14fee9;
+      }, addParticles = (_0xb7c984, _0x29805d, _0x54acd1) => {
+        new Array(_0xb7c984)[_0xc9c6('0x6')]()[_0xc9c6('0x5')](_0x572557 => {
+          _0x572557 = new Sprite['from'](_0x54acd1), _0x572557['vx'] = Math[_0xc9c6('0x14')]() * 0x3 + 0x1, _0x572557['x'] = _0x572557[_0xc9c6('0x13')] = innerWidth + (Math['floor'](Math['random']() * (innerWidth * 0x2 -
+            _0x54acd1[_0xc9c6('0xf')] * 0x2)) + _0x54acd1[_0xc9c6('0xf')] * 0x2), _0x572557['y'] = Math[_0xc9c6('0x1')](Math[_0xc9c6('0x14')]() * (getHeight() - _0x54acd1[_0xc9c6('0x4')] / 0x2)), _0x572557[_0xc9c6('0xc')]['x'] =
+            _0x572557[_0xc9c6('0xc')]['y'] = (Math['random']() * 0x32 + 0x32) / 0x64, _0x572557['alpha'] = Math[_0xc9c6('0x14')]() * 0x32 / 0x64, _0x29805d[_0xc9c6('0xb')](_0x572557);
+        });
+      },
+      bootstrapLayers = () => { addParticles(Math['floor'](innerWidth / 0xa), Fours, createText('1')), addParticles(Math[_0xc9c6('0x1')](innerWidth / 0xa), Ohhhs, createText('0')); },
+      Fours = new ParticleContainer(Math[_0xc9c6('0x1')](innerWidth / 0xa), PARTICLE_CONTAINER_OPTS), Ohhhs = new ParticleContainer(Math[_0xc9c6('0x1')](innerWidth / 0xa), PARTICLE_CONTAINER_OPTS),
+      Page = new ParticleContainer(Math['floor'](innerWidth / 0x32), PARTICLE_CONTAINER_OPTS); bootstrapLayers(), App[_0xc9c6('0x9')][_0xc9c6('0xb')](Fours), App[_0xc9c6('0x9')][_0xc9c6('0xb')](Ohhhs),
+        App[_0xc9c6('0x9')][_0xc9c6('0xb')](Page), App[_0xc9c6('0x11')][_0xc9c6('0x3')](onTick);
+  </script>
+</body>
+
+</html>

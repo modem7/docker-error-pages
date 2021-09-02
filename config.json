@@ -24,6 +24,10 @@
             "name": "hacker-terminal",
             "path": "./templates/hacker-terminal.html"
         }
+        {
+            "name": "hexxone",
+            "path": "./templates/hexxone.html"
+        }
     ],
     "output": {
         "file_extension": "html"
