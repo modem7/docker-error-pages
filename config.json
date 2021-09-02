@@ -13,6 +13,14 @@
             "path": "./templates/l7-dark.html"
         },
         {
+            "name": "shuffle",
+            "path": "./templates/shuffle.html"
+        },
+        {
+            "name": "hacker-terminal",
+            "path": "./templates/hacker-terminal.html"
+        },
+        {
             "name": "hexxone",
             "path": "./templates/hexxone.html"
         }
