@@ -47,7 +47,10 @@ steps:
 
 trigger:
   event:
-    - custom
     - cron
   cron:
     - errorpages_latest
+
+trigger:
+  event:
+    - custom
