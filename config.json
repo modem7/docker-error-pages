@@ -17,12 +17,12 @@
             "path": "./templates/shuffle.html"
         },
         {
-            "name": "hacker-terminal",
-            "path": "./templates/hacker-terminal.html"
+            "name": "noise",
+            "path": "./templates/noise.html"
         },
         {
-            "name": "hexxone",
-            "path": "./templates/hexxone.html"
+            "name": "hacker-terminal",
+            "path": "./templates/hacker-terminal.html"
         }
     ],
     "output": {

@@ -1,5 +1,5 @@
 # Image page: <https://hub.docker.com/_/node>
-FROM node:alpine as builder
+FROM node:15.14-alpine as builder
 
 # copy required sources into builder image
 COPY ./generator /src/generator
@@ -30,7 +30,7 @@ RUN set -x \
     && mv /src/docker/nginx-server.conf ./etc/nginx/conf.d/default.conf
 
 # Image page: <https://hub.docker.com/_/nginx>
-FROM nginx:mainline-alpine as runtime
+FROM nginx:1.21-alpine as runtime
 
 LABEL \
     # Docs: <https://github.com/opencontainers/image-spec/blob/master/annotations.md>
