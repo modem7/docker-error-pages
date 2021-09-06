@@ -29,7 +29,6 @@ steps:
       - linux/arm/v6
       - linux/arm/v7
       - linux/arm64/v8
-      - linux/386
       - linux/ppc64le
       - linux/s390x
     username:
@@ -38,7 +37,7 @@ steps:
       from_secret: docker_password
     tags: 
       - latest
-      - 1.1.1
+      # - 1.1.1
 
 - name: slack
   image: themaz/drone-slack
