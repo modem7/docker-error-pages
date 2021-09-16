@@ -9,7 +9,8 @@ COPY ./docker /src/docker
 
 # install generator dependencies
 WORKDIR /src/generator
-RUN yarn install --frozen-lockfile --no-progress --non-interactive
+RUN yarn install --frozen-lockfile --no-progress --non-interactive && \
+    chmod -R 755 /src
 
 # run generator
 WORKDIR /src
@@ -36,9 +37,9 @@ LABEL \
     # Docs: <https://github.com/opencontainers/image-spec/blob/master/annotations.md>
     org.opencontainers.image.title="error-pages" \
     org.opencontainers.image.description="Static server error pages in docker image" \
-    org.opencontainers.image.url="https://github.com/tarampampam/error-pages" \
-    org.opencontainers.image.source="https://github.com/tarampampam/error-pages" \
-    org.opencontainers.image.vendor="tarampampam" \
+    org.opencontainers.image.url="https://github.com/modem7/docker-error-pages" \
+    org.opencontainers.image.source="https://github.com/modem7/docker-error-pages" \
+    org.opencontainers.image.vendor="modem7" \
     org.opencontainers.image.licenses="MIT"
 
 # Import from builder

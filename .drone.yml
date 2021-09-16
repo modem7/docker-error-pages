@@ -14,7 +14,7 @@ steps:
   pull: if-not-exists
   commands:
     - hadolint --version
-    - hadolint Dockerfile*
+    - hadolint ErrorPages/Dockerfile*
 
 - name: latest  
   image: thegeeklab/drone-docker-buildx
@@ -31,13 +31,15 @@ steps:
       - linux/arm64/v8
       - linux/ppc64le
       - linux/s390x
+    Dockerfile: ErrorPages/Dockerfile
+    context: ErrorPages/
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
     tags: 
       - latest
-      - 1.2.0
+      - 1.2.1
 
 - name: slack
   image: themaz/drone-slack
