@@ -4,21 +4,21 @@
 
 # HTTP's error pages in Docker image
 
-[![Build Status][badge_build_status]][link_build_status]
-[![Image size][badge_size_latest]][link_docker_hub]
-[![Docker Pulls][badge_docker_pulls]][link_docker_hub]
-[![License][badge_license]][link_license]
+[![Build Status](https://drone.modem7.com/api/badges/modem7/docker-error-pages/status.svg)](https://drone.modem7.com/modem7/docker-error-pages)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/modem7/traefik-error-pages/latest)
+![Docker Pulls](https://img.shields.io/docker/pulls/modem7/traefik-error-pages)
+![License](https://img.shields.io/github/license/modem7/docker-error-pages)
 
 This repository contains:
 
-- A very simple [generator](generator/generator.js) _(`nodejs`)_ for HTTP error pages _(like `404: Not found`)_ with different templates supports
+- A very simple [generator](ErrorPages/generator/generator.js) _(`nodejs`)_ for HTTP error pages _(like `404: Not found`)_ with different templates supports
 - Dockerfile for docker image ([docker hub][link_docker_hub], [ghcr.io][link_ghcr]) with generated pages and `nginx` as a web server
 
-**Can be used for [Traefik error pages customization](https://docs.traefik.io/middlewares/errorpages/)**.
+**Can be used for [Traefik error pages customization](https://doc.traefik.io/traefik/middlewares/http/errorpages/)**.
 
 ## Demo
 
-Generated pages (from the latest release) always **[accessible here][link_gh_pages]** _(live preview)_.
+Generated pages (from the latest release) always **[accessible here](https://tarampampam.github.io/error-pages/)** _(live preview)_.
 
 ## Templates
 
@@ -29,6 +29,8 @@ Name              | Preview
 `l7-dark`         | [![l7-dark](https://hsto.org/webt/s1/ih/yr/s1ihyrqs_y-sgraoimfhk6ypney.png)](https://tarampampam.github.io/error-pages/l7-dark/404.html)
 `shuffle`         | [![shuffle](https://hsto.org/webt/7w/rk/3m/7wrk3mrzz3y8qfqwovmuvacu-bs.gif)](https://tarampampam.github.io/error-pages/shuffle/404.html)
 `hacker-terminal` | [![hacker-terminal](https://hsto.org/webt/5s/l0/p1/5sl0p1_ud_nalzjzsj5slz6dfda.gif)](https://tarampampam.github.io/error-pages/hacker-terminal/404.html)
+`hexxone`         | [Hexxone](https://github.com/hexxone/error-pages)
+`parallax`        | [Thom-x](https://github.com/Thom-x/docker-error-pages)
 
 ## Usage
 
@@ -56,7 +58,7 @@ And open in your browser `http://127.0.0.1:8082/ghost/400.html`.
 
 ### Custom error pages for [Traefik][link_traefik]
 
-Simple traefik (tested on `v2.4.8`) service configuration for usage in [docker swarm][link_swarm] (**change with your needs**):
+Simple traefik (tested on `v2.5`) service configuration (**change with your needs**):
 
 ```yaml
 version: '3.4'
@@ -113,4 +115,4 @@ networks:
 
 ## License
 
-This is open-sourced software licensed under the [MIT License][link_license].
+This is open-sourced software licensed under the [MIT License](https://github.com/modem7/docker-error-pages/blob/master/LICENSE).
