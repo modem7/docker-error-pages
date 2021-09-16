@@ -33,8 +33,6 @@ RUN set -x \
 # Image page: <https://hub.docker.com/_/nginx>
 FROM nginx:1-alpine as runtime
 
-RUN apk upgrade
-
 LABEL \
     # Docs: <https://github.com/opencontainers/image-spec/blob/master/annotations.md>
     org.opencontainers.image.title="error-pages" \
