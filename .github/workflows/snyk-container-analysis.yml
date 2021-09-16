@@ -36,7 +36,7 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: test:local
-        args: --file=ErrorPages/Dockerfile
+        args: --file=ErrorPages/Dockerfile --args: --severity-threshold=high
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v1
       with:
