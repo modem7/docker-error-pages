@@ -49,7 +49,7 @@ Also, you can use a special template name `random` - in this case template will 
 Execute in your shell:
 
 ```bash
-$ docker run --rm -p "8082:8080" tarampampam/error-pages:X.X.X
+$ docker run --rm -p "8082:8080" modem7/error-pages:latest
 ```
 
 And open in your browser `http://127.0.0.1:8082/ghost/400.html`.
@@ -63,7 +63,7 @@ version: '3.4'
 
 services:
   error-pages:
-    image: modem7/traefik-error-pages:1.0.0
+    image: modem7/traefik-error-pages:latest
     environment:
       TEMPLATE_NAME: l7-dark
     networks:
