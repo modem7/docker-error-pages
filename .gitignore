@@ -1,9 +1,0 @@
-## IDEs
-/.vscode
-/.idea
-
-## Dist
-/out
-
-## Temp dirs & trash
-.DS_Store
