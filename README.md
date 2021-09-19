@@ -18,7 +18,7 @@ This repository contains:
 
 ## Demo
 
-Generated pages (from the latest release) always **[accessible here](https://tarampampam.github.io/error-pages/)** _(live preview)_.
+Generated pages (from the latest release) always **[accessible here](https://modem7.github.io/docker-error-pages/)** _(live preview)_.
 
 ## Templates
 
