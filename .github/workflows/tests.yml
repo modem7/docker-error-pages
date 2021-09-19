@@ -62,6 +62,8 @@ jobs: # Docs: <https://git.io/JvxXE>
           test -f ./out/shuffle/404.html
           test -f ./out/noise/404.html
           test -f ./out/hacker-terminal/404.html
+          test -f ./out/parallax/404.html
+          test -f ./out/hexxone/404.html
 
   docker-build:
     name: Build docker image
