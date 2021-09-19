@@ -1,8 +1,20 @@
 name: release
 
+# on:
+  # release: # Docs: <https://git.io/JeBz1#release-event-release>
+    # types: [published]
+
 on:
-  release: # Docs: <https://git.io/JeBz1#release-event-release>
-    types: [published]
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
 
 jobs:
   demo:
