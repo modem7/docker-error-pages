@@ -46,6 +46,10 @@ jobs: # Docs: <https://git.io/JvxXE>
         working-directory: generator
         run: yarn install
 
+      - name: Make executable
+        working-directory: generator
+        run: chmod +x ./generator.js
+
       - name: Run generator
         run: ./generator/generator.js -i -c ./config.json -o ./out
 
