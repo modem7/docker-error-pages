@@ -91,26 +91,28 @@ try {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Error pages list</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.min.css"
-    integrity="sha512-6KY5s6UI5J7SVYuZB4S/CZMyPylqyyNZco376NM2Z8Sb8OxEdp02e1jkKk/wZxIEmjQ6DRCEBhni+gpr9c4tvA=="
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous" />
 </head>
 <body>
-<main role="main" class="container">\n`;
+   <div class="p-3 bg-dark text-white">
+<main role="main" class="container bg-dark text-white">\n`;
 
         Object.keys(generated).forEach(function(templateName) {
             content += `<h2 class="mt-5">Template name: <code>` + templateName + `</code></h2>\n<ul class="mb-5">\n`;
 
             generated[templateName].forEach((properties) => {
-                content += `  <li><a href="${properties.path}"><span class="badge badge-light">${properties.code}</span>: ${properties.message}</a></li>\n`;
+                content += `  <li><a href="${properties.path}"><span class="badge badge-dark">${properties.code} -</span>${properties.message}</a></li>\n`;
             })
 
             content += `</ul>\n`;
         });
 
         content += `</main>
-<footer class="footer">
-  <div class="container text-center text-muted mt-3 mb-3">
+   </div>
+<footer class="bg-dark">
+  <div class="container bg-dark text-center text-muted">
     For online documentation and support please refer to the <a href="https://github.com/tarampampam/error-pages">project repository</a>.
   </div>
 </footer>
