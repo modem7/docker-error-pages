@@ -1,0 +1,94 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+
+jobs: # Docs: <https://git.io/JvxXE>
+  gitleaks:
+    name: Gitleaks
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Check for GitLeaks
+        uses: zricethezav/gitleaks-action@v1.5.0 # Action page: <https://github.com/zricethezav/gitleaks-action>
+
+  generate:
+    name: Try to run generator
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1 # Action page: <https://github.com/actions/setup-node>
+        with:
+          node-version: 15
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        working-directory: generator
+        run: yarn install
+
+      - name: Make executable
+        working-directory: generator
+        run: chmod +x ./generator.js
+
+      - name: Run generator
+        run: ./generator/generator.js -i -c ./config.json -o ./out
+
+      - name: Test file creation
+        run: |
+          test -f ./out/index.html
+          test -f ./out/ghost/404.html
+          test -f ./out/l7-dark/404.html
+          test -f ./out/l7-light/404.html
+          test -f ./out/shuffle/404.html
+          test -f ./out/hacker-terminal/404.html
+          test -f ./out/parallax/404.html
+          test -f ./out/hexxone/404.html
+
+  docker-build:
+    name: Build docker image
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: docker build -f ./Dockerfile --tag image:local .
+
+      - name: Scan image
+        uses: anchore/scan-action@v2 # action page: <https://github.com/anchore/scan-action>
+        with:
+          image: image:local
+          fail-build: true
+          severity-cutoff: medium # negligible, low, medium, high or critical
+
+      - name: Run docker image
+        run: docker run --rm -d -p "8080:8080/tcp" -e "TEMPLATE_NAME=ghost" image:local
+
+      - name: Pause
+        run: sleep 2
+
+      - name: Verify 500.html error file exists in root
+        run: curl -sS --fail "http://127.0.0.1:8080/500.html"
+
+      - name: Verify root request HTTP code
+        run: test $(curl --write-out %{http_code} --silent --output /dev/null http://127.0.0.1:8080/) -eq 404
