@@ -26,8 +26,12 @@ jobs:
         working-directory: generator
         run: yarn install
 
+      - name: Make executable
+        working-directory: generator
+        run: chmod +x ./generator.js
+
       - name: Generate pages
-        cmd: ./generator/generator.js -i -c ./config.json -o ./out
+        run: ./generator/generator.js -i -c ./config.json -o ./out
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
