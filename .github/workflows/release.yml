@@ -27,7 +27,7 @@ jobs:
         run: yarn install
 
       - name: Generate pages
-        run: ./generator/generator.js -i -c ./config.json -o ./out
+        run: sudo ./generator/generator.js -i -c ./config.json -o ./out
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
