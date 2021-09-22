@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "javascript" # See documentation for possible values
+  - package-ecosystem: "npm" # See documentation for possible values
     directory: "/generator" # Location of package manifests
     schedule:
       interval: "daily"
