@@ -1,14 +1,7 @@
 .dockerignore
-Dockerfile
 .github
 .git
 .gitignore
-.editorconfig
-.idea
-.vscode
-test
-temp
-tmp
-LICENSE
-Makefile
-error-pages
+/generator/node_modules
+/generator/*.log
+/out

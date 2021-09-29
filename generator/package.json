@@ -1,0 +1,10 @@
+{
+    "name": "error-pages",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/modem7/docker-error-pages.git"
+    },
+    "dependencies": {
+        "yargs": "17.1"
+    }
+}
