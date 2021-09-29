@@ -55,11 +55,11 @@ steps:
     cache_from: "modem7/traefik-error-pages:latest"
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm/v7
-      - linux/arm64/v8
-      - linux/ppc64le
-      - linux/s390x
+      # - linux/arm/v6
+      # - linux/arm/v7
+      # - linux/arm64/v8
+      # - linux/ppc64le
+      # - linux/s390x
     username:
       from_secret: docker_username
     password:
