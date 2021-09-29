@@ -4,14 +4,14 @@
 FROM golang:1.17.1-alpine as builder
 
 # can be passed with any prefix (like `v1.2.3@GITHASH`), e.g.: `docker build --build-arg "APP_VERSION=v1.2.3@GITHASH" .`
-ARG APP_VERSION="undefined@docker"
+ARG APP_VERSION="2.0.0"
 
 WORKDIR /src
 
 COPY . .
 
 # arguments to pass on each go tool link invocation
-ENV LDFLAGS="-s -w -X github.com/tarampampam/error-pages/internal/version.version=$APP_VERSION"
+ENV LDFLAGS="-s -w -X github.com/modem7/error-pages/internal/version.version=$APP_VERSION"
 
 RUN set -x \
     && go version \
