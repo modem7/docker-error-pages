@@ -16,34 +16,34 @@ steps:
     - hadolint --version
     - hadolint Dockerfile*
 
-- name: Install Node
-  image: node:15
+# - name: Install Node
+  # image: node:15
+  # # context: generator/
+  # commands:
+    # - node -v
+    # - npm -v
+    # - yarn --version
+    # - yarn config set cache-folder /node_modules
+    # - cd ./generator && yarn install
+
+# - name: Run generator
+  # image: node:15
+  # commands:
+    # - chmod +x ./generator/generator.js
+    # - ./generator/generator.js -i -c ./config.json -o ./out
+
+# - name: Testing
+  # image: node:15
   # context: generator/
-  commands:
-    - node -v
-    - npm -v
-    - yarn --version
-    - yarn config set cache-folder /node_modules
-    - cd ./generator && yarn install
-
-- name: Run generator
-  image: node:15
-  commands:
-    - chmod +x ./generator/generator.js
-    - ./generator/generator.js -i -c ./config.json -o ./out
-
-- name: Testing
-  image: node:15
-  context: generator/
-  commands:
-    - test -f ./out/index.html
-    - test -f ./out/ghost/404.html
-    - test -f ./out/l7-dark/404.html
-    - test -f ./out/l7-light/404.html
-    - test -f ./out/shuffle/404.html
-    - test -f ./out/hacker-terminal/404.html
-    - test -f ./out/parallax/404.html
-    - test -f ./out/hexxone/404.html
+  # commands:
+    # - test -f ./out/index.html
+    # - test -f ./out/ghost/404.html
+    # - test -f ./out/l7-dark/404.html
+    # - test -f ./out/l7-light/404.html
+    # - test -f ./out/shuffle/404.html
+    # - test -f ./out/hacker-terminal/404.html
+    # - test -f ./out/parallax/404.html
+    # - test -f ./out/hexxone/404.html
 
 - name: Build  
   image: thegeeklab/drone-docker-buildx
@@ -66,7 +66,7 @@ steps:
       from_secret: docker_password
     tags: 
       - latest
-      - 1.2.2
+      - 2.0.0
 
 - name: slack
   image: themaz/drone-slack
