@@ -25,6 +25,10 @@
             "path": "./templates/hexxone.html"
         },
         {
+            "name": "cats",
+            "path": "./templates/cats.html"
+        },
+        {
             "name": "parallax",
             "path": "./templates/parallax.html"
         }
