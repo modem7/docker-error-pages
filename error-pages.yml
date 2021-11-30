@@ -8,7 +8,6 @@ templates:
   - path: ./templates/l7-light.html
   - path: ./templates/l7-dark.html
   - path: ./templates/shuffle.html
-  - path: ./templates/noise.html
   - path: ./templates/hacker-terminal.html
   - path: ./templates/cats.html
   - path: ./templates/hexxone.html
