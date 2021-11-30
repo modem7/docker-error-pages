@@ -10,8 +10,8 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"github.com/tarampampam/error-pages/internal/config"
-	"github.com/tarampampam/error-pages/internal/tpl"
+	"github.com/modem7/docker-error-pages/internal/config"
+	"github.com/modem7/docker-error-pages/internal/tpl"
 	"go.uber.org/zap"
 )
 
@@ -187,7 +187,7 @@ func writeIndexFile(path string, history map[string][]historyItem) error {
 <footer class="footer">
   <div class="container text-center text-muted mt-3 mb-3">
     For online documentation and support please refer to the
-      <a href="https://github.com/tarampampam/error-pages">project repository</a>.
+      <a href="https://github.com/modem7/docker-error-pages">project repository</a>.
   </div>
 </footer>
 </body>

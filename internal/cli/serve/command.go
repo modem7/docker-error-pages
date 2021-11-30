@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/tarampampam/error-pages/internal/breaker"
-	"github.com/tarampampam/error-pages/internal/config"
-	appHttp "github.com/tarampampam/error-pages/internal/http"
-	"github.com/tarampampam/error-pages/internal/pick"
-	"github.com/tarampampam/error-pages/internal/tpl"
+	"github.com/modem7/docker-error-pages/internal/breaker"
+	"github.com/modem7/docker-error-pages/internal/config"
+	appHttp "github.com/modem7/docker-error-pages/internal/http"
+	"github.com/modem7/docker-error-pages/internal/pick"
+	"github.com/modem7/docker-error-pages/internal/tpl"
 	"go.uber.org/zap"
 )
 

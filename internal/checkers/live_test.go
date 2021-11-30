@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tarampampam/error-pages/internal/checkers"
+	"github.com/modem7/docker-error-pages/internal/checkers"
 )
 
 func TestLiveChecker_Check(t *testing.T) {

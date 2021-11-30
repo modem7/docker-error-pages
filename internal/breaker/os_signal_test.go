@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tarampampam/error-pages/internal/breaker"
+	"github.com/modem7/docker-error-pages/internal/breaker"
 )
 
 func TestNewOSSignals(t *testing.T) {

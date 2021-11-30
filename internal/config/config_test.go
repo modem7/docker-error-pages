@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/tarampampam/error-pages/internal/config"
+	"github.com/modem7/docker-error-pages/internal/config"
 )
 
 func TestConfig_Validate(t *testing.T) {

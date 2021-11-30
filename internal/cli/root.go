@@ -7,14 +7,14 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/tarampampam/error-pages/internal/checkers"
-	buildCmd "github.com/tarampampam/error-pages/internal/cli/build"
-	healthcheckCmd "github.com/tarampampam/error-pages/internal/cli/healthcheck"
-	serveCmd "github.com/tarampampam/error-pages/internal/cli/serve"
-	versionCmd "github.com/tarampampam/error-pages/internal/cli/version"
-	"github.com/tarampampam/error-pages/internal/env"
-	"github.com/tarampampam/error-pages/internal/logger"
-	"github.com/tarampampam/error-pages/internal/version"
+	"github.com/modem7/docker-error-pages/internal/checkers"
+	buildCmd "github.com/modem7/docker-error-pages/internal/cli/build"
+	healthcheckCmd "github.com/modem7/docker-error-pages/internal/cli/healthcheck"
+	serveCmd "github.com/modem7/docker-error-pages/internal/cli/serve"
+	versionCmd "github.com/modem7/docker-error-pages/internal/cli/version"
+	"github.com/modem7/docker-error-pages/internal/env"
+	"github.com/modem7/docker-error-pages/internal/logger"
+	"github.com/modem7/docker-error-pages/internal/version"
 )
 
 const configFileFlagName = "config-file"

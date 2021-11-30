@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/tarampampam/error-pages/internal/env"
+	"github.com/modem7/docker-error-pages/internal/env"
 )
 
 type checker interface {

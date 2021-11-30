@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
-	"github.com/tarampampam/error-pages/internal/cli"
+	"github.com/modem7/docker-error-pages/internal/cli"
 )
 
 func TestSubcommands(t *testing.T) {

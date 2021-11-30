@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/tarampampam/error-pages/internal/tpl"
+	"github.com/modem7/docker-error-pages/internal/tpl"
 
 	"github.com/stretchr/testify/assert"
 )
