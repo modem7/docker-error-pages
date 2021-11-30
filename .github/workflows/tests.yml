@@ -48,7 +48,7 @@ jobs: # Docs: <https://git.io/JvxXE>
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-go-
 
-      - if: steps.go-cache.outputs.cache-hit != 'true'
+      - if: steps.go-cache.outputs.cache-hit = 'true'
         run: go mod download
 
       - name: Run Unit tests
