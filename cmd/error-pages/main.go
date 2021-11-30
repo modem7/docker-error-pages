@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/fatih/color"
-	"github.com/tarampampam/error-pages/internal/cli"
+	"github.com/modem7/docker-error-pages/internal/cli"
 )
 
 // exitFn is a function for application exiting.
