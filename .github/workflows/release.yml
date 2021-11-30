@@ -50,7 +50,7 @@ jobs:
 
       - name: Take rendered templates from the built docker image
         run: |
-          docker create --name img modem7/error-page-test:latest
+          docker create --name img modem7/traefik-error-pages:latest
           docker cp img:/opt/html ./out
           docker rm -f img
 
