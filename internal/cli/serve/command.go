@@ -7,12 +7,12 @@ import (
 	"sort"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/modem7/docker-error-pages/internal/breaker"
 	"github.com/modem7/docker-error-pages/internal/config"
 	appHttp "github.com/modem7/docker-error-pages/internal/http"
 	"github.com/modem7/docker-error-pages/internal/pick"
 	"github.com/modem7/docker-error-pages/internal/tpl"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
 

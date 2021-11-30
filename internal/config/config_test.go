@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/config"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestConfig_Validate(t *testing.T) {

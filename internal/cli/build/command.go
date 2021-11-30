@@ -8,10 +8,10 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
 	"github.com/modem7/docker-error-pages/internal/config"
 	"github.com/modem7/docker-error-pages/internal/tpl"
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
 

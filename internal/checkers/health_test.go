@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/checkers"
+	"github.com/stretchr/testify/assert"
 )
 
 type httpClientFunc func(*http.Request) (*http.Response, error)

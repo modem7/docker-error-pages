@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/pick"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestStringsSlice_Pick_First(t *testing.T) {
