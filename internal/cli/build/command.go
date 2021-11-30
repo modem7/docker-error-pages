@@ -166,8 +166,8 @@ func writeIndexFile(path string, history map[string][]historyItem) error {
     integrity="sha512-6KY5s6UI5J7SVYuZB4S/CZMyPylqyyNZco376NM2Z8Sb8OxEdp02e1jkKk/wZxIEmjQ6DRCEBhni+gpr9c4tvA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body class="bg-light">
-<div class="container">
+<body class="bg-dark text-white"">
+<div class="container bg-dark text-white">
   <main>
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="https://hsto.org/webt/rm/9y/ww/rm9ywwx3gjv9agwkcmllhsuyo7k.png"
@@ -184,8 +184,8 @@ func writeIndexFile(path string, history map[string][]historyItem) error {
 {{ end }}
   </main>
 </div>
-<footer class="footer">
-  <div class="container text-center text-muted mt-3 mb-3">
+<footer class="bg-dark">
+  <div class="container bg-dark text-center text-muted mt-3 mb-3">
     For online documentation and support please refer to the
       <a href="https://github.com/tarampampam/error-pages">project repository</a>.
   </div>
