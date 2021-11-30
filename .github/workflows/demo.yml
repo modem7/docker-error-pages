@@ -1,0 +1,24 @@
+name: demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  demo:
+    name: Update the demonstration
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: gacts/github-slug@v1
+        id: slug
+
+      - name: Take rendered templates from the built docker image
+        run: |
+          docker create --name img modem7/traefik-error-pages:latest
+          docker cp img:/opt/html ./out
+          docker rm -f img
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
