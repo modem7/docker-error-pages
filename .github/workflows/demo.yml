@@ -8,6 +8,16 @@ jobs:
     name: Update the demonstration
     runs-on: ubuntu-20.04
     steps:
+      - name: DroneCI Build Trigger
+        # You may pin to the exact commit or the version.
+        # uses: kzonix/drone-ci-trigger@03d7df83e955a100e8a721cfe39de9b980822f1e
+        uses: kzonix/drone-ci-trigger@0.0.2
+        with:
+          # URL of API for interacting with the Drone server. Example: http://localhost:8080/api
+          droneApiUrl: 'http://drone.modem7.com/api'
+          # Drone API Personal Token
+          droneApiToken: '$DRONE_TOKEN'
+          
       - uses: gacts/github-slug@v1
         id: slug
 
