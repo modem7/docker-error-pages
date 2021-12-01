@@ -39,5 +39,4 @@ steps:
 
 trigger:
   event:
-    - push
     - custom
