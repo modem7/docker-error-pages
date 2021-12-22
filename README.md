@@ -2,8 +2,6 @@
   <img src="https://hsto.org/webt/rm/9y/ww/rm9ywwx3gjv9agwkcmllhsuyo7k.png" width="94" alt="" />
 </p>
 
-# TEMPORARY REPO CLONED FROM https://github.com/tarampampam/error-pages FOR TESTING.
-
 # HTTP's error pages
 
 [![Release version][badge_release_version]][link_releases]
