@@ -3,20 +3,30 @@
 version: 2
 
 updates:
-  - package-ecosystem: gomod
-    directory: /
-    schedule: {interval: monthly}
-    reviewers: [modem7]
-    assignees: [modem7]
+  - package-ecosystem: "gomod" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    assignees:
+      - "modem7"
 
   - package-ecosystem: github-actions
-    directory: /
-    schedule: {interval: monthly}
-    reviewers: [modem7]
-    assignees: [modem7]
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    assignees:
+      - "modem7"
 
-  - package-ecosystem: docker
-    directory: /
-    schedule: {interval: monthly}
-    reviewers: [modem7]
-    assignees: [modem7]
+  - package-ecosystem: "docker" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    assignees:
+      - "modem7"
+
+  - package-ecosystem: github-actions
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    assignees:
+      - "modem7"
