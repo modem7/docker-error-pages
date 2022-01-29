@@ -1,0 +1,4 @@
+When a new version is released, run the following:
+
+cd /docker-error-pages
+docker run --rm -v $(pwd):/data cytopia/gofmt -w .
