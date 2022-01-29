@@ -3,8 +3,8 @@ package core_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/http/core"
+	"github.com/stretchr/testify/assert"
 	"github.com/valyala/fasthttp"
 )
 

@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/config"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFromYaml(t *testing.T) {

@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/kami-zh/go-capturer"
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/logger"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewNotVerboseDebugJSON(t *testing.T) {

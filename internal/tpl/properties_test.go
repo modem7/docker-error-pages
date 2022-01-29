@@ -3,8 +3,8 @@ package tpl_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/tpl"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestProperties_Replaces(t *testing.T) {

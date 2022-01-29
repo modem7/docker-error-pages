@@ -3,8 +3,8 @@ package pick_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/modem7/docker-error-pages/internal/pick"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPicker_NextIndex_First(t *testing.T) {

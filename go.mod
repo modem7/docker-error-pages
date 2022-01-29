@@ -1,4 +1,4 @@
-module github.com/tarampampam/error-pages
+module github.com/modem7/docker-error-pages
 
 go 1.17
 

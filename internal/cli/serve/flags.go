@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/spf13/pflag"
 	"github.com/modem7/docker-error-pages/internal/env"
+	"github.com/spf13/pflag"
 )
 
 type flags struct {

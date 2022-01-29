@@ -4,11 +4,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/modem7/docker-error-pages/internal/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/testutil"
 	dto "github.com/prometheus/client_model/go"
 	"github.com/stretchr/testify/assert"
-	"github.com/modem7/docker-error-pages/internal/metrics"
 )
 
 func TestMetrics_Register(t *testing.T) {

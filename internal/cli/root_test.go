@@ -3,9 +3,9 @@ package cli_test
 import (
 	"testing"
 
+	"github.com/modem7/docker-error-pages/internal/cli"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
-	"github.com/modem7/docker-error-pages/internal/cli"
 )
 
 func TestSubcommands(t *testing.T) {
