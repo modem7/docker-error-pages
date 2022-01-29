@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/modem7/docker-error-pages/internal/env"
 	"github.com/spf13/pflag"
+	"github.com/modem7/docker-error-pages/internal/env"
 )
 
 type flags struct {
@@ -19,6 +19,8 @@ type flags struct {
 		name string
 	}
 	defaultErrorPage string
+	defaultHTTPCode  uint16
+	showDetails      bool
 }
 
 const (
@@ -26,6 +28,8 @@ const (
 	portFlagName             = "port"
 	templateNameFlagName     = "template-name"
 	defaultErrorPageFlagName = "default-error-page"
+	defaultHTTPCodeFlagName  = "default-http-code"
+	showDetailsFlagName      = "show-details"
 )
 
 const (
@@ -61,9 +65,21 @@ func (f *flags) init(flagSet *pflag.FlagSet) {
 		"404",
 		fmt.Sprintf("default error page [$%s]", env.DefaultErrorPage),
 	)
+	flagSet.Uint16VarP(
+		&f.defaultHTTPCode,
+		defaultHTTPCodeFlagName, "",
+		404, //nolint:gomnd
+		fmt.Sprintf("default HTTP response code [$%s]", env.DefaultHTTPCode),
+	)
+	flagSet.BoolVarP(
+		&f.showDetails,
+		showDetailsFlagName, "",
+		false,
+		fmt.Sprintf("show request details in response [$%s]", env.ShowDetails),
+	)
 }
 
-func (f *flags) overrideUsingEnv(flagSet *pflag.FlagSet) (lastErr error) {
+func (f *flags) overrideUsingEnv(flagSet *pflag.FlagSet) (lastErr error) { //nolint:gocognit,gocyclo
 	flagSet.VisitAll(func(flag *pflag.Flag) {
 		// flag was NOT defined using CLI (flags should have maximal priority)
 		if !flag.Changed { //nolint:nestif
@@ -91,6 +107,22 @@ func (f *flags) overrideUsingEnv(flagSet *pflag.FlagSet) (lastErr error) {
 				if envVar, exists := env.DefaultErrorPage.Lookup(); exists {
 					f.defaultErrorPage = strings.TrimSpace(envVar)
 				}
+
+			case defaultHTTPCodeFlagName:
+				if envVar, exists := env.DefaultHTTPCode.Lookup(); exists {
+					if code, err := strconv.ParseUint(envVar, 10, 16); err == nil { //nolint:gomnd
+						f.defaultHTTPCode = uint16(code)
+					} else {
+						lastErr = fmt.Errorf("wrong default HTTP response code environment variable [%s] value", envVar)
+					}
+				}
+
+			case showDetailsFlagName:
+				if envVar, exists := env.ShowDetails.Lookup(); exists {
+					if b, err := strconv.ParseBool(envVar); err == nil {
+						f.showDetails = b
+					}
+				}
 			}
 		}
 	})
@@ -101,6 +133,10 @@ func (f *flags) overrideUsingEnv(flagSet *pflag.FlagSet) (lastErr error) {
 func (f *flags) validate() error {
 	if net.ParseIP(f.listen.ip) == nil {
 		return fmt.Errorf("wrong IP address [%s] for listening", f.listen.ip)
+	}
+
+	if f.defaultHTTPCode > 599 { //nolint:gomnd
+		return fmt.Errorf("wrong default HTTP response code [%d]", f.defaultHTTPCode)
 	}
 
 	return nil

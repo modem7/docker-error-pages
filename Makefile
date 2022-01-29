@@ -3,13 +3,13 @@
 # Makefile readme (en): <https://www.gnu.org/software/make/manual/html_node/index.html#SEC_Contents>
 
 SHELL = /bin/sh
-LDFLAGS = "-s -w -X github.com/modem7/docker-error-pages/internal/version.version=$(shell git rev-parse HEAD)"
+LDFLAGS = "-s -w -X github.com/tarampampam/error-pages/internal/version.version=$(shell git rev-parse HEAD)"
 
 DC_RUN_ARGS = --rm --user "$(shell id -u):$(shell id -g)"
 APP_NAME = $(notdir $(CURDIR))
 
 .PHONY : help \
-         image dive build fmt lint gotest test shell \
+         image dive build fmt lint gotest int-test test shell \
          up down restart \
          clean
 .DEFAULT_GOAL : help
@@ -42,7 +42,10 @@ lint: ## Run app linters
 gotest: ## Run app tests
 	docker-compose run $(DC_RUN_ARGS) --no-deps app go test -v -race -timeout 10s ./...
 
-test: lint gotest ## Run app tests and linters
+int-test: ## Run integration tests (docs: https://hurl.dev/docs/man-page.html#options)
+	docker-compose run --rm hurl --color --test --fail-at-end --variable host=web --variable port=8080 --summary ./test/hurl/*.hurl
+
+test: lint gotest int-test ## Run app tests and linters
 
 shell: ## Start shell into container with golang
 	docker-compose run $(DC_RUN_ARGS) app bash

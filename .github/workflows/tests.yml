@@ -24,11 +24,27 @@ jobs: # Docs: <https://git.io/JvxXE>
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+
       - name: Run linter
         uses: golangci/golangci-lint-action@v2 # Action page: <https://github.com/golangci/golangci-lint-action>
         with:
-          version: v1.42 # without patch version
+          version: v1.44 # without patch version
           only-new-issues: false # show only new issues if it's a pull request
+
+  validate-config-file:
+    name: Validate config file
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with: {node-version: '16'}
+
+      - name: Install linter
+        run: npm install -g ajv-cli # Package page: <https://www.npmjs.com/package/ajv-cli>
+
+      - name: Run linter
+        run: ajv validate --all-errors --verbose -s ./schemas/config/1.0.schema.json -d ./error-pages.y*ml
 
   go-test:
     name: Unit tests
@@ -68,7 +84,7 @@ jobs: # Docs: <https://git.io/JvxXE>
       matrix:
         os: [linux, darwin] # linux, freebsd, darwin, windows
         arch: [amd64]  # amd64, 386
-    needs: [golangci-lint, go-test]
+    needs: [golangci-lint, go-test, validate-config-file]
     steps:
       - uses: actions/setup-go@v2
         with: {go-version: 1.17}
@@ -136,3 +152,86 @@ jobs: # Docs: <https://git.io/JvxXE>
           test -f ./out/cats/404.html
           test -f ./out/hexxone/404.html
           test -f ./out/parallax/404.html
+
+  docker-image:
+    name: Build docker image
+    runs-on: ubuntu-20.04
+    needs: [golangci-lint, go-test, validate-config-file]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: gacts/github-slug@v1
+        id: slug
+
+      - uses: docker/build-push-action@v2 # Action page: <https://github.com/docker/build-push-action>
+        with:
+          context: .
+          file: Dockerfile
+          push: false
+          build-args: "APP_VERSION=${{ steps.slug.outputs.branch-name-slug }}@${{ steps.slug.outputs.commit-hash-short }}"
+          tags: app:ci
+
+      - run: docker save app:ci > ./docker-image.tar
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: ./docker-image.tar
+          retention-days: 1
+
+  scan-docker-image:
+    name: Scan the docker image
+    runs-on: ubuntu-20.04
+    needs: [docker-image]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: docker-image
+          path: .artifact
+
+      - working-directory: .artifact
+        run: docker load < docker-image.tar
+
+      - uses: anchore/scan-action@v3 # action page: <https://github.com/anchore/scan-action>
+        with:
+          image: app:ci
+          fail-build: true
+          severity-cutoff: low # negligible, low, medium, high or critical
+
+  poke-docker-image:
+    name: Run the docker image
+    runs-on: ubuntu-20.04
+    needs: [docker-image]
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: docker-image
+          path: .artifact
+
+      - working-directory: .artifact
+        run: docker load < docker-image.tar
+
+      - name: Download hurl
+        env:
+          VERSION: 1.5.0
+        run: curl -SL -o hurl.deb https://github.com/Orange-OpenSource/hurl/releases/download/${VERSION}/hurl_${VERSION}_amd64.deb
+
+      - name: Install hurl
+        run: sudo dpkg -i hurl.deb
+
+      - name: Run container with the app
+        run: docker run --rm -d -p "8080:8080/tcp" -e "SHOW_DETAILS=true" --name app app:ci
+
+      - name: Wait for container "healthy" state
+        run: until [[ "`docker inspect -f {{.State.Health.Status}} app`" == "healthy" ]]; do echo "wait 1 sec.."; sleep 1; done
+
+      - run: hurl --color --test --fail-at-end --variable host=127.0.0.1 --variable port=8080 --summary ./test/hurl/*.hurl
+
+      - name: Stop the container
+        if: always()
+        run: docker kill app

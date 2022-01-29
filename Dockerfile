@@ -31,6 +31,7 @@ RUN set -x \
     && echo 'appuser:x:10001:' > ./etc/group \
     && mv /src/error-pages ./bin/error-pages \
     && mv /src/templates ./opt/templates \
+    && rm ./opt/templates/*.md \
     && mv /src/error-pages.yml ./opt/error-pages.yml
 
 WORKDIR /tmp/rootfs/opt
@@ -49,8 +50,8 @@ LABEL \
     # Docs: <https://github.com/opencontainers/image-spec/blob/master/annotations.md>
     org.opencontainers.image.title="error-pages" \
     org.opencontainers.image.description="Static server error pages in the docker image" \
-    org.opencontainers.image.url="https://github.com/tarampampam/error-pages" \
-    org.opencontainers.image.source="https://github.com/tarampampam/error-pages" \
+    org.opencontainers.image.url="https://github.com/modem7/docker-error-pages" \
+    org.opencontainers.image.source="https://github.com/modem7/docker-error-pages" \
     org.opencontainers.image.vendor="tarampampam" \
     org.opencontainers.version="$APP_VERSION" \
     org.opencontainers.image.licenses="MIT"
@@ -65,12 +66,12 @@ WORKDIR /opt
 
 ENV LISTEN_PORT="8080" \
     TEMPLATE_NAME="ghost" \
-    DEFAULT_ERROR_PAGE="404"
+    DEFAULT_ERROR_PAGE="404" \
+    DEFAULT_HTTP_CODE="404" \
+    SHOW_DETAILS="false"
 
 # Docs: <https://docs.docker.com/engine/reference/builder/#healthcheck>
-HEALTHCHECK --interval=7s --timeout=2s CMD [ \
-    "/bin/error-pages", "healthcheck", "--log-json" \
-]
+HEALTHCHECK --interval=7s --timeout=2s CMD ["/bin/error-pages", "healthcheck", "--log-json"]
 
 ENTRYPOINT ["/bin/error-pages"]
 

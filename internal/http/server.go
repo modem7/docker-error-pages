@@ -6,18 +6,22 @@ import (
 
 	"github.com/fasthttp/router"
 	"github.com/modem7/docker-error-pages/internal/checkers"
+	"github.com/modem7/docker-error-pages/internal/config"
 	"github.com/modem7/docker-error-pages/internal/http/common"
 	errorpageHandler "github.com/modem7/docker-error-pages/internal/http/handlers/errorpage"
 	healthzHandler "github.com/modem7/docker-error-pages/internal/http/handlers/healthz"
 	indexHandler "github.com/modem7/docker-error-pages/internal/http/handlers/index"
+	metricsHandler "github.com/modem7/docker-error-pages/internal/http/handlers/metrics"
 	notfoundHandler "github.com/modem7/docker-error-pages/internal/http/handlers/notfound"
 	versionHandler "github.com/modem7/docker-error-pages/internal/http/handlers/version"
+	"github.com/modem7/docker-error-pages/internal/metrics"
 	"github.com/modem7/docker-error-pages/internal/version"
 	"github.com/valyala/fasthttp"
 	"go.uber.org/zap"
 )
 
 type Server struct {
+	log    *zap.Logger
 	fast   *fasthttp.Server
 	router *router.Router
 }
@@ -29,21 +33,19 @@ const (
 )
 
 func NewServer(log *zap.Logger) Server {
-	r := router.New()
-
 	return Server{
 		// fasthttp docs: <https://github.com/valyala/fasthttp>
 		fast: &fasthttp.Server{
 			WriteTimeout:          defaultWriteTimeout,
 			ReadTimeout:           defaultReadTimeout,
 			IdleTimeout:           defaultIdleTimeout,
-			Handler:               common.LogRequest(r.Handler, log),
 			NoDefaultServerHeader: true,
 			ReduceMemoryUsage:     true,
 			CloseOnShutdown:       true,
 			Logger:                zap.NewStdLog(log),
 		},
-		router: r,
+		router: router.New(),
+		log:    log,
 	}
 }
 
@@ -52,27 +54,41 @@ func (s *Server) Start(ip string, port uint16) error {
 	return s.fast.ListenAndServe(ip + ":" + strconv.Itoa(int(port)))
 }
 
-type (
-	errorsPager interface {
-		// GetPage with passed template name and error code.
-		GetPage(templateName, code string) ([]byte, error)
-	}
-
-	templatePicker interface {
-		// Pick the template name for responding.
-		Pick() string
-	}
-)
+type templatePicker interface {
+	// Pick the template name for responding.
+	Pick() string
+}
 
 // Register server routes, middlewares, etc.
 // Router docs: <https://github.com/fasthttp/router>
-func (s *Server) Register(errorsPager errorsPager, templatePicker templatePicker, defaultPageCode string) {
-	s.router.GET("/", indexHandler.NewHandler(errorsPager, templatePicker, defaultPageCode))
+func (s *Server) Register(
+	cfg *config.Config,
+	templatePicker templatePicker,
+	defaultPageCode string,
+	defaultHTTPCode uint16,
+	showDetails bool,
+) error {
+	reg, m := metrics.NewRegistry(), metrics.NewMetrics()
+
+	if err := m.Register(reg); err != nil {
+		return err
+	}
+
+	s.fast.Handler = common.DurationMetrics(common.LogRequest(s.router.Handler, s.log), &m)
+
+	s.router.GET("/", indexHandler.NewHandler(cfg, templatePicker, defaultPageCode, defaultHTTPCode, showDetails))
+	s.router.GET("/{code}.html", errorpageHandler.NewHandler(cfg, templatePicker, showDetails))
 	s.router.GET("/version", versionHandler.NewHandler(version.Version()))
-	s.router.ANY("/health/live", healthzHandler.NewHandler(checkers.NewLiveChecker()))
-	s.router.GET("/{code}.html", errorpageHandler.NewHandler(errorsPager, templatePicker))
+
+	liveHandler := healthzHandler.NewHandler(checkers.NewLiveChecker())
+	s.router.ANY("/healthz", liveHandler)
+	s.router.ANY("/health/live", liveHandler) // deprecated
+
+	s.router.GET("/metrics", metricsHandler.NewHandler(reg))
 
 	s.router.NotFound = notfoundHandler.NewHandler()
+
+	return nil
 }
 
 // Stop server.

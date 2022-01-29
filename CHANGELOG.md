@@ -4,11 +4,40 @@ All notable changes to this package will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
-## UNRELEASED
+## v2.4.0
 
 ### Changed
 
-- Go updated from `1.17.1` up to `1.17.2`
+- It is now possible to use [golang-tags of templates](https://pkg.go.dev/text/template) in error page templates and formatted (`json`, `xml`) responses [#49]
+- Health-check route become `/healthz` (instead `/health/live`, previous route marked as deprecated) [#49]
+
+### Added
+
+- The templates contain details block now (can be enabled using `--show-details` flag for the `serve` command or environment variable `SHOW_DETAILS=true`) [#49]
+- Formatted response templates (`json`, `xml`) - the server responds with a formatted response depending on the `Content-Type` (and `X-Format`) request header value [#49]
+- HTTP header `X-Robots-Tag: noindex` for the error pages [#49]
+- Possibility to pass the needed error page code using `X-Code` HTTP header [#49]
+- Possibility to integrate with [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) [#49]
+- Metrics HTTP endpoint `/metrics` in prometheus format [#54]
+
+### Fixed
+
+- Potential race condition (in the `pick.StringsSlice` struct) [#49]
+
+[#54]:https://github.com/tarampampam/error-pages/pull/54
+[#49]:https://github.com/tarampampam/error-pages/pull/49
+
+## v2.3.0
+
+### Added
+
+- Flag `--default-http-code` for the `serve` subcommand (`404` is used by default instead of `200`, environment name `DEFAULT_HTTP_CODE`) [#41]
+
+### Changed
+
+- Go updated from `1.17.1` up to `1.17.5`
+
+[#41]:https://github.com/tarampampam/error-pages/issues/41
 
 ## v2.2.0
 

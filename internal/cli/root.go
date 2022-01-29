@@ -5,6 +5,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"github.com/modem7/docker-error-pages/internal/checkers"
 	buildCmd "github.com/modem7/docker-error-pages/internal/cli/build"
 	healthcheckCmd "github.com/modem7/docker-error-pages/internal/cli/healthcheck"
@@ -13,8 +15,6 @@ import (
 	"github.com/modem7/docker-error-pages/internal/env"
 	"github.com/modem7/docker-error-pages/internal/logger"
 	"github.com/modem7/docker-error-pages/internal/version"
-	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
 )
 
 const configFileFlagName = "config-file"

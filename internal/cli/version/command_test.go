@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/kami-zh/go-capturer"
-	"github.com/modem7/docker-error-pages/internal/cli/version"
 	"github.com/stretchr/testify/assert"
+	"github.com/modem7/docker-error-pages/internal/cli/version"
 )
 
 func TestProperties(t *testing.T) {
