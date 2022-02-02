@@ -4,6 +4,31 @@ All notable changes to this package will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v2.6.0
+
+### Added
+
+- Possibility to change the template to the random once a day using "special" template name `random-daily` (or hourly, using `random-hourly`) [#48]
+
+[#48]:https://github.com/tarampampam/error-pages/issues/48
+
+## v2.5.0
+
+### Changed
+
+- Go updated from `1.17.5` up to `1.17.6`
+
+### Added
+
+- `Host` and `X-Forwarded-For` Header to error pages [#61]
+
+### Fixed
+
+- Performance issue, that affects template rendering. Now templates are cached in memory (for 2 seconds), and it has improved performance by more than 200% [#60]
+
+[#60]:https://github.com/tarampampam/error-pages/pull/60
+[#61]:https://github.com/tarampampam/error-pages/pull/61
+
 ## v2.4.0
 
 ### Changed
