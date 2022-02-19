@@ -11,6 +11,7 @@
 [![Coverage][badge-coverage]][coverage]
 [![Image size][badge-image-size]][docker-hub]
 [![License][badge-license]][license]
+[![GitHub last commit](https://img.shields.io/github/last-commit/modem7/docker-error-pages)](https://github.com/modem7/docker-error-pages)
 
 One day you may want to replace the standard error pages of your HTTP server with something more original and pretty. That's what this repository was created for :) It contains:
 
